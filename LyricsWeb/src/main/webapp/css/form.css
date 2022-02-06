@@ -1,0 +1,14 @@
+table {
+	margin-top: 10%;
+	margin-bottom: 10%;
+	border-collapse: collapse;
+}
+
+th {
+	height: 70px;
+}
+
+td {
+	text-align: left;
+	padding: 15px;
+}
