@@ -26,11 +26,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests()
+		http.authorizeRequests()
 			.antMatchers("/auth/**").permitAll()
 			.and().formLogin().loginPage("/auth/loginPage")
 			.loginProcessingUrl("/login").usernameParameter("username").passwordParameter("password")
-			.defaultSuccessUrl("/korisnici/getUsername");
+			.defaultSuccessUrl("/korisnici/getUsername").
+			and().exceptionHandling().accessDeniedPage("/jsp/greska/NijeDozvoljeno.jsp");
+		
+		http.csrf().disable();
 	}
 
 }

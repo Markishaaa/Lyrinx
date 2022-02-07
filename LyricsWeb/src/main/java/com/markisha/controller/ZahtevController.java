@@ -11,13 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.markisha.enums.Zahtevi;
 import com.markisha.repository.AlbumRepository;
 import com.markisha.repository.IzvodjacRepository;
 import com.markisha.repository.KorisnikRepository;
 import com.markisha.repository.ZahtevRepository;
-import com.markisha.annotations.KorisnikAuth;
-import com.markisha.annotations.ModeratorAuth;
-import com.markisha.enums.Zahtevi;
 
 import model.Album;
 import model.Izvodjac;
@@ -52,7 +50,6 @@ public class ZahtevController {
 		m.addAttribute("zahtev", zahtev);
 	}
 
-	@KorisnikAuth
 	@RequestMapping(value = "/zahtevPesma", method = RequestMethod.POST)
 	public String zahtevPesma(String ime, int strofa, Integer idIzvodjaca, Integer idAlbuma, String tekst, Model m,
 			HttpServletRequest request) {
@@ -88,7 +85,6 @@ public class ZahtevController {
 		return "jsp/unos/unosZahteva/UnosZahteva";
 	}
 
-	@KorisnikAuth
 	@RequestMapping(value = "/zahtevAlbum", method = RequestMethod.POST)
 	public String zahtevAlbum(String ime, int brPesama, Integer idIzvodjaca, Model m, HttpServletRequest request) {
 		try {
@@ -118,7 +114,6 @@ public class ZahtevController {
 		return "jsp/unos/unosZahteva/UnosZahteva";
 	}
 
-	@KorisnikAuth
 	@RequestMapping(value = "/zahtevIzvodjac", method = RequestMethod.POST)
 	public String zahtevIzvodjac(String ime, Model m, HttpServletRequest request) {
 		try {
@@ -145,7 +140,6 @@ public class ZahtevController {
 		return "jsp/unos/unosZahteva/UnosZahteva";
 	}
 
-	@KorisnikAuth
 	@RequestMapping(value = "/getZahtevi", method = RequestMethod.GET)
 	public String getZahtevi(Model m) {
 		m.addAttribute("zahtevi", Zahtevi.values());
@@ -153,7 +147,6 @@ public class ZahtevController {
 		return "jsp/unos/unosZahteva/UnosTipaZahteva";
 	}
 	
-	@KorisnikAuth
 	@RequestMapping(value = "/zahtevEditPesme", method = RequestMethod.POST)
 	public String zahtevEditPesme(String tekst, HttpServletRequest request, Model m) {
 		try {
@@ -190,7 +183,6 @@ public class ZahtevController {
 		return "redirect:/pesme/nadjiPesmu?pesma=" + p.getImePesme();
 	}
 
-	@KorisnikAuth
 	@RequestMapping(value = "/getTipZahteva", method = RequestMethod.GET)
 	public String getTipZahteva(Zahtevi tipZahteva, HttpServletRequest request) {
 		request.getSession().setAttribute("tipZahteva", tipZahteva);
@@ -208,7 +200,7 @@ public class ZahtevController {
 		return "jsp/unos/unosZahteva/UnosZahteva";
 	}
 
-	@ModeratorAuth
+	//@ModeratorAuth
 	@RequestMapping(value = "/getRandomZahtev", method = RequestMethod.GET)
 	public String getRandomZahtev(HttpServletRequest request) {
 		List<Zahtev> zahtevi = zr.nadjiNeocenjene();
@@ -224,7 +216,7 @@ public class ZahtevController {
 		return "jsp/pregled/pregledZahteva/PregledZahteva";
 	}
 
-	@ModeratorAuth
+	//@ModeratorAuth
 	@RequestMapping(value = "/odobrenjeZahteva", method = RequestMethod.POST)
 	public String odobrenjeZahteva(boolean odobrenje, HttpServletRequest request, Model m) {
 		try {
@@ -250,7 +242,7 @@ public class ZahtevController {
 		return "jsp/pregled/pregledZahteva/PregledZahteva";
 	}
 	
-	@ModeratorAuth
+	//@ModeratorAuth
 	@RequestMapping(value = "/dodajZahtevUBazu", method = RequestMethod.GET)
 	public String dodajZahtevUBazu(Model m, HttpServletRequest request) {
 		try {

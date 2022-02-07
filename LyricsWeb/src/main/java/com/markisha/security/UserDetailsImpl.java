@@ -16,9 +16,16 @@ public record UserDetailsImpl(String username, @JsonIgnore String password, Gran
 		implements UserDetails {
 
 	public static UserDetailsImpl build(Korisnik user) {
-		GrantedAuthority authority = new SimpleGrantedAuthority("USER_" + user.getUloga().toString());
+		try {
+			
+			GrantedAuthority authority = new SimpleGrantedAuthority("USER_" + user.getUloga().toString());
 
-		return new UserDetailsImpl(user.getUsername(), user.getPassword(), authority);
+			return new UserDetailsImpl(user.getUsername(), user.getPassword(), authority);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override

@@ -20,7 +20,7 @@
 
 	<div class="center">
 		<div class="filter-invert">
-			<a href="/Lyrics/"><div class="logo"></div></a>
+			<a href="/Lyrics/pesme/nadjiNovePesme"><div class="logo"></div></a>
 		</div>
 	</div>
 

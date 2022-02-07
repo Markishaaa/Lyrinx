@@ -11,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.markisha.annotations.AdminAuth;
-import com.markisha.annotations.ModeratorAuth;
 import com.markisha.repository.IzvodjacRepository;
 
 import model.Izvodjac;
@@ -25,7 +23,7 @@ public class IzvodjacController {
 	@Autowired
 	IzvodjacRepository ir;
 	
-	@AdminAuth
+	//@AdminAuth
 	@RequestMapping(value = "/dodajIzvodjaca", method = RequestMethod.POST)
 	public String dodajIzvodjaca(String ime, Model m) {
 		try {
@@ -84,7 +82,7 @@ public class IzvodjacController {
 		return "redirect:/albumi/nadjiAlbume";
 	}
 	
-	@ModeratorAuth
+	//@ModeratorAuth
 	@RequestMapping(value = "/dodajZahtevKaoIzvodjaca", method = RequestMethod.GET)
 	public String dodajZahtevKaoIzvodjaca(HttpServletRequest request, Model m) {
 		try {

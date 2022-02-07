@@ -19,9 +19,13 @@
 				<img style="float: left; margin-left: 10%" SRC="${ album.slika }" width="100" height="100">
 			</c:if>
 			<br>
-			<a href="/Lyrics/jsp/unos/UnosSlikeAlbuma.jsp">Upload an image</a>
+			<c:if test="${ (trenutniKorisnik.uloga eq 'ADMIN') or (trenutniKorisnik eq 'MODERATOR') }">
+				<a href="/Lyrics/jsp/unos/UnosSlikeAlbuma.jsp">Upload an image</a>
+			</c:if>
 		
-			<jsp:include page="/jsp/delovi/JedanAlbum.jsp" />
+			<div class="album">
+				<jsp:include page="/jsp/delovi/JedanAlbum.jsp" />
+			</div>
 		</div>
 		
 		<jsp:include page="/jsp/delovi/Footer.jsp" />

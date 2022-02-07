@@ -16,19 +16,19 @@
 
 		<div id="center">
 			<c:choose>
-				<c:when test="${ empty korisnik } }">
+				<c:when test="${ !empty korisnik } }">
 					<p>Username: ${ korisnik.username }</p>
 					<p>Role: ${ korisnik.uloga }</p>
 					
-					<security:authorize access="isAuthenticated()">
-						<a href="/Lyrics/korisnici/banujKorisnika?k=${ korisnik.idKorisnika }">Ban user</a>
-					</security:authorize>
+					<c:if test="${ (trenutniKorisnik.uloga eq 'ADMIN') }">
+						<security:authorize access="isAuthenticated()">
+							<a href="/Lyrics/korisnici/banujKorisnika?k=${ korisnik.idKorisnika }">Ban user</a>
+						</security:authorize>
+					</c:if>
 				</c:when>
 				<c:otherwise>
 					<p>Username: ${ trenutniKorisnik.username }</p>
-					<form action="/Lyrics/korisnici/promovisiKorisnika" method="post">
-						<input type="submit" value="Promote" />
-					</form>
+					<p>Role: ${ trenutniKorisnik.uloga }</p>
 					<br>
 					<c:if test="${ !empty korisnik.pesmas }">
 						<p>Contributed to songs:</p>

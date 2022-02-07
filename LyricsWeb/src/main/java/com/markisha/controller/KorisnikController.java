@@ -12,8 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.markisha.annotations.AdminAuth;
-import com.markisha.annotations.KorisnikAuth;
 import com.markisha.repository.KorisnikRepository;
 
 import model.Korisnik;
@@ -26,10 +24,12 @@ public class KorisnikController {
 	KorisnikRepository kr;
 
 	@RequestMapping(value = "/getKorisnici", method = RequestMethod.GET)
-	public void getKorisnici(Model m) {
+	public String getKorisnici(Model m) {
 		List<Korisnik> korisnici = kr.findAll();
 
 		m.addAttribute("korisnici", korisnici);
+		
+		return "jsp/unos/BanujKorisnika";
 	}
 
 	// trazi ulogovanog korisnika
@@ -55,7 +55,6 @@ public class KorisnikController {
 		return "jsp/pregled/KorisnikInfo";
 	}
 
-	@AdminAuth
 	@RequestMapping(value = "/promovisiKorisnika", method = RequestMethod.POST)
 	public String promovisiKorisnika(HttpServletRequest request) {
 		try {
@@ -92,10 +91,9 @@ public class KorisnikController {
 		request.getSession().setAttribute("trenutniKorisnik", k);
 		request.getSession().setAttribute("username", username);
 
-		return "index";
+		return "redirect:/pesme/nadjiNovePesme";
 	}
 	
-	@KorisnikAuth
 	@RequestMapping(value = "/promeniUsername", method = RequestMethod.POST)
 	public String promeniUsername(String noviUsername, Model m, HttpServletRequest request) {
 		Korisnik k = (Korisnik) request.getSession().getAttribute("korisnik");
@@ -119,24 +117,26 @@ public class KorisnikController {
 		return "jsp/pregled/KorisnikInfo";
 	}
 	
-	@AdminAuth
-	@RequestMapping(value = "/banujKorisnika", method = RequestMethod.GET)
-	public String banujKorisnika(HttpServletRequest request, Model m) {
+	
+	//@AdminAuth
+	@RequestMapping(value = "/banujKorisnika", method = RequestMethod.POST)
+	public String banujKorisnika(Integer idKorisnika, Model m) {
 		try {
 			
-			int idKor = Integer.parseInt(request.getParameter("korisnik"));
-			Korisnik k = kr.findById(idKor).get();
+			Korisnik k = kr.findById(idKorisnika).get();
 			
 			k.setUloga("BANOVAN");
 			
 			kr.save(k);
 			
+			m.addAttribute("ban", "User banned!");
+			
 		} catch (Exception e) {
-			m.addAttribute("greskaBan", "Something went wrong.");
+			m.addAttribute("ban", "Something went wrong.");
 			e.printStackTrace();
 		}
 		
-		return "jsp/pregled/KorisnikInfo";
+		return "jsp/unos/BanujKorisnika";
 	}
 
 }

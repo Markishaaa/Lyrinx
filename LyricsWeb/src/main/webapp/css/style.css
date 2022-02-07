@@ -2,7 +2,7 @@ body {
 	background-color: #1a1a1a;
 	margin: 0;
 	color: white;
-	font-size: 100%;
+	font-size: 130%;
 	font-family: Consolas, monaco, monospace;
 }
 
@@ -16,6 +16,22 @@ body {
 	margin-top: 0.5%;
 	margin-left: 0.3%;
 	height: 33px;
+}
+
+#center input[type=submit] {
+  background-color: white;
+  border: none;
+  color: #808080;
+  padding: 20px;
+  padding-bottom: 30px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+#center select {
+	width: 175px;
+	height: 30px;
 }
 
 
@@ -48,10 +64,10 @@ body {
 
 #center {
 	background-color: #262626;
+	width: 60%;
 	margin-left: 20%;
-	margin-right: 20%;
 	margin-top: 1%;
-	margin-bottom: 5%;
+	margin-bottom: 10%;
 	padding-top: 15px;
 	min-height: 800px;
 	text-align: center;
@@ -59,6 +75,21 @@ body {
 
 #center a, p {
 	line-height: 1.6;
+}
+
+.header {
+	font-size: 80%;
+	width: auto;
+	white-space: nowrap;
+    padding: 20px;
+    display: table;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.header a {
+	color: white;
+	text-decoration: none;
 }
 
 .footer {
@@ -122,7 +153,7 @@ input {
 }
 
 hr {
-	margin-left: 4%;
+	margin-left: 2%;
 	margin-right:4%;
 	border-color: #484848;
 }
@@ -133,6 +164,7 @@ textarea {
 
 .container {
     padding: 20px;
+    display: flex;
 }
 
 #centerPesme {
@@ -140,6 +172,8 @@ textarea {
 	display: inline-block;
 	width: 70%;
     padding: 20px;
+    padding-left: 2%;
+    padding-bottom: 2%;
     min-height: 800px;
     margin-right: 5%;
     margin-bottom: 10%;
@@ -153,11 +187,17 @@ textarea {
     min-height: 800px;
     margin-right: 5%;
     margin-bottom: 10%;
+    margin-left: 1.2%;
 }
 
 #centerKomentar a {
-color: white;
-text-decoration: none;
+	color: white;
+	text-decoration: none;
+}
+
+#center a {
+	color: white;
+	text-decoration: underline;
 }
 
 #centerKomentar a:active {
@@ -177,6 +217,12 @@ text-decoration: none;
 	margin-top: 10%;
 	width: 15%;
     padding: 20px;
+	margin-bottom: 10%;    
+}
+
+.album a {
+	color: white;
+	text-decoration: none;
 }
 
 #center img {

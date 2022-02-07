@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.markisha.annotations.KorisnikAuth;
 import com.markisha.repository.KomentarRepository;
 import com.markisha.repository.KorisnikRepository;
 import com.markisha.repository.PesmaRepository;
@@ -32,7 +31,6 @@ public class KomentarController {
 	@Autowired
 	PesmaRepository pr;
 	
-	@KorisnikAuth
 	@RequestMapping(value = "/dodajKomentar", method = RequestMethod.POST)
 	public String dodajKomentar(String sadrzaj, HttpServletRequest request, Model m) {
 		Pesma p = (Pesma) request.getSession().getAttribute("pesma");
@@ -83,7 +81,6 @@ public class KomentarController {
 		return "redirect:/pesme/nadjiPesmu?pesma=" + p.getImePesme();
 	}
 	
-	@KorisnikAuth
 	@RequestMapping(value = "/dodajUpvote", method = RequestMethod.GET)
 	public String dodajUpvote(HttpServletRequest request) {
 		Pesma p = (Pesma) request.getSession().getAttribute("pesma");
@@ -109,7 +106,6 @@ public class KomentarController {
 		return "redirect:/komentari/nadjiKomentare?pesma=" + p.getImePesme();
 	}
 	
-	@KorisnikAuth
 	@RequestMapping(value = "/dodajDownvote", method = RequestMethod.GET)
 	public String dodajDownvote(HttpServletRequest request) {
 		Pesma p = (Pesma) request.getSession().getAttribute("pesma");

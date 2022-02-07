@@ -11,5 +11,5 @@ import org.springframework.security.access.prepost.PreAuthorize;
 @Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
-@PreAuthorize("hasAnyAuthority('USER', 'MOD', 'ADMIN')")
+@PreAuthorize("hasAnyAuthority('KORISNIK', 'MOD', 'ADMIN')")
 public @interface KorisnikAuth {}

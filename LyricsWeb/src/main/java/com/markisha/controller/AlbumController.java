@@ -11,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.markisha.annotations.AdminAuth;
-import com.markisha.annotations.ModeratorAuth;
 import com.markisha.repository.AlbumRepository;
 import com.markisha.repository.IzvodjacRepository;
 import com.markisha.repository.KorisnikRepository;
@@ -36,7 +34,7 @@ public class AlbumController {
 	@Autowired
 	KorisnikRepository kr;
 	
-	@AdminAuth
+	//@AdminAuth
 	@RequestMapping(value = "/dodajAlbum", method = RequestMethod.POST)
 	public String dodajAlbum(String ime, int brPesama, Integer idIzvodjaca, Model m, HttpServletRequest request) {
 		try {
@@ -57,7 +55,7 @@ public class AlbumController {
 		return "jsp/unos/UnosAlbuma";
 	}
 
-	@ModeratorAuth
+	//@ModeratorAuth
 	@RequestMapping(value = "/dodajPesmuUAlbum", method = RequestMethod.POST)
 	public String dodajPesmuUAlbum(Integer idPesme, Integer idAlbuma, Model m) {
 		try {
@@ -69,6 +67,7 @@ public class AlbumController {
 				p.setAlbum(a);
 			}
 			pr.save(p);
+			m.addAttribute("pesmaAlbum", "Song successfully added.");
 			
 		} catch(Exception e) {
 			m.addAttribute("greska", "There has been an error.");
@@ -137,7 +136,7 @@ public class AlbumController {
 		return "jsp/pregled/PregledJednogAlbuma";
 	}
 	
-	@ModeratorAuth
+	//@ModeratorAuth
 	@RequestMapping(value = "/dodajZahtevKaoAlbum", method = RequestMethod.GET)
 	public String dodajZahtevKaoAlbum(HttpServletRequest request, Model m) {
 		try {
@@ -160,7 +159,7 @@ public class AlbumController {
 		return "jsp/pregled/pregledZahteva/PregledZahteva";
 	}
 	
-	@ModeratorAuth
+	//@ModeratorAuth
 	@RequestMapping(value = "/dodajSliku", method = RequestMethod.POST)
 	public String dodajSliku(String url, HttpServletRequest request) {
 		Album a = (Album) request.getSession().getAttribute("album");

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%request.setAttribute("root", request.getContextPath());%>
 <!DOCTYPE html>
 <html>
@@ -33,13 +34,18 @@
 					<% request.getSession().setAttribute("greskaEditZahtev", null); %>
 					<br><br>
 				</c:if>
-				<p><a href="/Lyrics/jsp/unos/unosZahteva/EditPesmeZahtev.jsp">Request to edit this song</a></p>
+				
+				<security:authorize access="isAuthenticated()">
+					<c:if test="${ (trenutniKorisnik.uloga eq 'ADMIN') or (trenutniKorisnik.uloga eq 'MODERATOR') or (trenutniKorisnik.uloga eq 'KORISNIK') }">
+						<p><a href="/Lyrics/jsp/unos/unosZahteva/EditPesmeZahtev.jsp">Request to edit this song</a></p>
+					</c:if>
+				</security:authorize>
 				<br><br>
 				<jsp:include page="/jsp/delovi/JedanAlbum.jsp" />
 			</div>
-			
-			<jsp:include page="/jsp/delovi/Komentari.jsp" />
 		</div>
+		
+		<jsp:include page="/jsp/delovi/Komentari.jsp" />
 		
 		<jsp:include page="/jsp/delovi/Footer.jsp" />
 	</div>

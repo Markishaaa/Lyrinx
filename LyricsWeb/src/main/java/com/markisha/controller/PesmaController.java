@@ -1,6 +1,7 @@
 package com.markisha.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.markisha.annotations.AdminAuth;
-import com.markisha.annotations.ModeratorAuth;
 import com.markisha.repository.AlbumRepository;
 import com.markisha.repository.IzvodjacRepository;
 import com.markisha.repository.KorisnikRepository;
@@ -36,7 +35,7 @@ public class PesmaController {
 	@Autowired
 	KorisnikRepository kr;
 	
-	@AdminAuth
+	//@AdminAuth
 	@RequestMapping(value = "/dodajPesmu", method = RequestMethod.POST)
 	public String dodajPesmu(String ime, int strofa, Integer idIzvodjaca, Integer idAlbuma, 
 			String tekst, Model m, HttpServletRequest request) {
@@ -123,7 +122,7 @@ public class PesmaController {
 		return "redirect:/izvodjaci/nadjiIzvodjace";
 	}
 	
-	@ModeratorAuth
+	//@ModeratorAuth
 	@RequestMapping(value = "/dodajZahtevKaoPesmu", method = RequestMethod.GET)
 	public String dodajZahtevKaoPesmu(HttpServletRequest request, Model m) {
 		try {
@@ -148,7 +147,7 @@ public class PesmaController {
 		return "jsp/pregled/pregledZahteva/PregledZahteva";
 	}
 	
-	@ModeratorAuth
+	//@ModeratorAuth
 	@RequestMapping(value = "/dodajZahtevKaoEdit", method = RequestMethod.GET)
 	public String dodajZahtevKaoEdit(HttpServletRequest request, Model m) {
 		try {
@@ -167,6 +166,52 @@ public class PesmaController {
 		}
 		
 		return "jsp/pregled/pregledZahteva/PregledZahteva";
+	}
+	
+	@RequestMapping(value = "/nadjiNovePesme", method = RequestMethod.GET)
+	public String nadjiNovePesme(HttpServletRequest request) {
+		try {
+			
+			List<Pesma> pesme = pr.findAll();
+			List<Pesma> najnovije = new ArrayList<Pesma>();
+			
+			if (pesme != null && pesme.size() > 0) {
+				Collections.reverse(pesme);
+				int br = 0;
+				for (int i = 0; i < pesme.size(); i++) {
+					najnovije.add(pesme.get(i));
+					
+					br++;
+					if (br == 10)
+						break;
+				}
+				
+				request.getSession().setAttribute("najnovije", najnovije);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "index";
+	}
+	
+	@RequestMapping(value = "/obrisiPesmu", method = RequestMethod.POST)
+	public String obrisiPesmu(String ime, String izvodjac, Model m) {
+		try {
+
+			Izvodjac i = ir.findByImeIzvodjacaIgnoreCase(izvodjac);
+			Pesma p = pr.findByImePesmeIgnoreCaseAndIzvodjac(ime, i);
+			
+			pr.deleteById(p.getIdPesme());
+			m.addAttribute("obrisiPesmu", "Song " + ime + " successfully deleted.");
+		
+		} catch (Exception e) {
+			m.addAttribute("obrisiPesmu", "Something went wrong. Check for spelling errors.");
+			e.printStackTrace();
+		}
+		
+		return "jsp/brisanje/BrisanjePesme";
 	}
 
 }

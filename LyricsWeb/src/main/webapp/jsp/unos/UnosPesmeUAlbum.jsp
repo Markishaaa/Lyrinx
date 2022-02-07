@@ -45,12 +45,12 @@
 			</form>
 			
 			<c:choose>
-				<c:when test="${ empty greska }">
-					<p>Song successfully added.</p>
+				<c:when test="${ !empty pesmaAlbum }">
+					<p>${ pesmaAlbum }</p>
 				</c:when>
-				<c:otherwise>
+				<c:when test="${ !empty greska }">
 					<p>${ greska }</p>
-				</c:otherwise>
+				</c:when>
 			</c:choose>
 		</div>
 		

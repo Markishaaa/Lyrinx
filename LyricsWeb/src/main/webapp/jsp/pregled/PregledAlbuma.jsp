@@ -17,7 +17,10 @@
 		
 		<div id="center">
 			<h2><a href="/Lyrics/izvodjaci/nadjiIzvodjaca?izvodjac=${ pesma.izvodjac.imeIzvodjaca }">${ pesma.izvodjac.imeIzvodjaca }</a></h2>
-			<jsp:include page="/jsp/delovi/JedanAlbum.jsp" />
+			
+			<div class="album">
+				<jsp:include page="/jsp/delovi/JedanAlbum.jsp" />
+			</div>
 		</div>
 		
 		<jsp:include page="/jsp/delovi/Footer.jsp" />

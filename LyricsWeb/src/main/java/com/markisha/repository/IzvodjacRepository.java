@@ -7,5 +7,6 @@ import model.Izvodjac;
 public interface IzvodjacRepository extends JpaRepository<Izvodjac, Integer> {
 
 	public Izvodjac findByImeIzvodjaca(String ime);
+	public Izvodjac findByImeIzvodjacaIgnoreCase(String ime);
 	
 }

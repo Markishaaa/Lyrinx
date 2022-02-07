@@ -8,7 +8,6 @@
 <head>
 <title>Lyrinx | ${ pesma.imePesme }</title>
 <link href="${ root }/css/style.css" rel="stylesheet" type="text/css">
-<link href="${ root }/css/link.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -16,18 +15,27 @@
 		<jsp:include page="/jsp/delovi/Meni.jsp" />
 		
 		<div id="center">
-			<h2>${ izvodjac.imeIzvodjaca }</h2>
-			<h3>Albums:</h3>
-			<div class="album">
-				<c:forEach var="album" items="${ izvodjac.albums }">
-					<h4><a href="/Lyrics/jsp/pregled/PregledAlbuma.jsp">${ album.nazivAlbuma }</a></h4>
-					<ol>
-						<c:forEach var="pesma" items="${ album.pesmas }">
-							<li><a href="/Lyrics/komentari/nadjiKomentare?pesma=${ pesma.imePesme }">${ pesma.imePesme }</a></li>
-						</c:forEach>
-					</ol>
-				</c:forEach>
-			</div>
+			<form action="/Lyrics/korisnici/banujKorisnika" method="post">
+				<table class="centerTable">
+					<tr>	
+						<td>
+							<select name="idKorisnika">
+								<c:forEach items="${ korisnici }" var="k">
+									<option value="${ k.idKorisnika }">${ k.username }</option>
+								</c:forEach>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td><input type="submit" value="BAN"></td>
+					</tr>
+				</table>
+				
+				<br><br>
+				<c:if test="${ !empty ban }">
+					<p>${ ban }</p>
+				</c:if>
+			</form>
 		</div>
 		
 		<jsp:include page="/jsp/delovi/Footer.jsp" />

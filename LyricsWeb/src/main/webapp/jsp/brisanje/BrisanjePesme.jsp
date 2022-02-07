@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Lyrinx | New Album</title>
+<title>Lyrinx | ${ pesma.imePesme }</title>
 <link href="${ root }/css/style.css" rel="stylesheet" type="text/css">
 <link href="${ root }/css/form.css" rel="stylesheet">
 </head>
@@ -14,21 +14,31 @@
 <body>
 	<div class="filter">
 		<jsp:include page="/jsp/delovi/Meni.jsp" />
-	
+		
 		<div id="center">
-			<form action="/Lyrics/albumi/dodajAlbum" method="post">
-				<jsp:include page="/jsp/delovi/unos/DeoUnosAlbuma.jsp" />
+			<form action="/Lyrics/pesme/obrisiPesmu" method="post">
+				<table class="centerTable">
+					<tr>
+						<td>Artist name:</td>
+						<td><input type="text" name="izvodjac" required></td>
+					</tr>
+					<tr>
+						<td>Song name:</td>
+						<td><input type="text" name="ime" required></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" value="Save"></td>
+					</tr>
+				</table>
 			</form>
 			<br>
-			<c:choose>
-				<c:when test="${ !empty album }">
-					<p>Album saved successfully. Album ID: ${ album.idAlbuma }</p>
-				</c:when>
-				<c:otherwise>
-					<p>${ greska }</p>
-				</c:otherwise>
-			</c:choose>
-			<br> <br> <a href="/Lyrics/index.jsp">Back to main page.</a>
+			<c:if test="${ !empty obrisiPesmu }">
+				<p>${ obrisiPesmu }</p>
+			</c:if>
+			<br>
+			<br>
+			<a href="/Lyrics/index.jsp">Back to main page.</a>
 		</div>
 		
 		<jsp:include page="/jsp/delovi/Footer.jsp" />

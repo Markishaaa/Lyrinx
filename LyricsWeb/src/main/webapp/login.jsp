@@ -33,8 +33,8 @@
 							placeholder="enter your password" required></td>
 					</tr>
 					<tr>
-						<td><input type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token}" /></td>
+						<td><input type="hidden" name="${ _csrf.parameterName }"
+							value="${ _csrf.token }" /></td>
 						<td><input type="submit" value="Login"></td>
 					</tr>
 				</table>

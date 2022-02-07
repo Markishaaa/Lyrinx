@@ -8,6 +8,7 @@
 		<td><input type="text" name="ime" required></td>
 	</tr>
 	<tr>
+		<td></td>
 		<td><input type="submit" value="Save"></td>
 	</tr>
 </table>
